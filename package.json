@@ -1,0 +1,29 @@
+{
+  "name": "medium-clone",
+  "version": "1.0.0",
+  "description": "project for Andersen courses",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/ArtemKuzmenko5063281/mediumclone/src/master/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}

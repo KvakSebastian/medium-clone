@@ -30,18 +30,18 @@
 <main class="main-articles-wrapper">
     <section class='panel-wrapper'>
         <button class="add-article">
-            Додати Статтю
+            <a href="create-article.html">Додати Статтю</a>
         </button>
-        <div class="select">
-            <select name="slct" id="slct">
-                <option selected disabled>Сортувати за</option>
-                <option value="1">Датою</option>
-                <option value="2">Категорією</option>
-            </select>
+        <div class="card-input-wrapper">
+            <input type="text" list="exampleList" placeholder="Сортувати за" name="sort">
+                    <datalist id="exampleList">
+                        <option>Датою</option>
+                        <option>Категорією</option>
+                    </datalist>
         </div>
     </section>
     <div class="main-content-articles">
-        <a href="">
+        <a href="article.html">
             <div class="main-content-articles__item">
                 <div class="articles__item-text">
                     <div class="articles__item-text-header"><span>Nazi Hippies: When the New Age and Far Right Overlap</span></div>

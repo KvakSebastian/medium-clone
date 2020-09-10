@@ -20,6 +20,14 @@ module.exports = {
             filename: 'articles.html',
             template: './src/articles.html'
         }),
+        new HtmlWebpackPlugin({
+          filename: 'article.html',
+          template: './src/article.html'
+      }),
+        new HtmlWebpackPlugin({
+          filename: 'create-article.html',
+          template: './src/create-article.html'
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/style.css'
           })

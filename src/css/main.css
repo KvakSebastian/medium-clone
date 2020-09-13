@@ -1,0 +1,233 @@
+html,
+body {
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.tac {
+    text-align: center;
+}
+
+header {
+    opacity: 0.8;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.main-nav {
+    margin: 1em 5em 0 1.3em;
+}
+
+a {
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.main-nav a {
+    float: left;
+    color: black;
+    padding: 0.4em 2.2em;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+a.header-logo {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: medium-marketing-display-font, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.header-button {
+    float: right;
+}
+
+a.main-active {
+    background-color: #00aa7d;
+    color: white;
+    font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.main-active {
+    padding: 13px 100px;
+    font-size: 22px;
+}
+
+.main-wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.main-content {
+    padding-bottom: 200px;
+    position: relative;
+    min-height: 100%;
+}
+
+.centering {
+    width: 80%;
+    margin: 90px auto;
+}
+.h2-font {
+    font-family: medium-marketing-display-font, Georgia, Cambria, "Times New Roman", Times, serif;
+    line-height: 75px;
+    color: rgba(41, 41, 41, 1);
+    transform: scale(1, 1.2);
+    font-weight: 600;
+}
+
+.font70px {
+    font-size: 70px;
+}
+
+.category {
+    display: inline-block;
+}
+
+.categories .category {
+    border-radius: 100em;
+    background-color: rgba(242, 242, 242, 1);
+    margin: 5px;
+    padding: 10px 11px 11px 7px;
+    font-size: 24px;
+}
+
+.category a, .no-ads p, .pros-subscript,.medium-is {
+    color: rgba(117, 117, 117, 1);
+}
+
+.category:hover {
+    opacity: 0.8;
+}
+
+.circle {
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    padding: 6px 11px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.pros-medium .circle {
+    background-color: #00aa7d;
+    color: white;
+    padding: 5px 12px 4px 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.sign-in p {
+    margin-top: 25px;
+    font-size: 17px;
+}
+
+.no-ads h2 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.font23px {
+    font-size: 23px;
+}
+
+.no-ads {
+    margin-left: 75px;
+}
+
+.medium-do{
+   padding-left: 40px;
+}
+
+.about-medium {
+    display: flex;
+    margin: 30px 75px 50px 75px;
+}
+
+.get-started {
+    margin-top: 70px;
+    width: 40%;
+}
+
+.medium-is {
+    line-height: 30px;
+}
+
+.curios-readers h2 {
+    font-size: 55px;
+}
+
+.medium-great {
+    background-color: rgba(12, 242, 143, .2);
+    padding: 5%;
+    color: rgba(41,41,41,1);
+}
+
+.subscription {
+    margin-bottom: 40px;
+}
+
+.green-link {
+    text-decoration: none;
+    color: #00aa7d;
+}
+
+.mb0 {
+    margin-bottom: 0;
+}
+
+hr {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.main-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-size: 23px;
+}
+
+.main-footer a {
+    color: white;
+}
+
+.main-footer div {
+    margin: 15px 0 10px 75px;
+}
+
+@media screen and (max-width: 540px) {
+    .sign-in .main-active, .get-started .main-active{
+        padding: 10px 20px!important;
+    }
+    .category{
+        padding: 5px;
+    }
+    .no-ads,.get-started, .medium-do{
+        width: 80%!important;
+        margin: 0 auto!important;
+    }
+    .medium-do{
+        padding-left: 0;
+    }
+    .curios-readers{
+        padding-left: 40px;
+    }
+    .about-medium{
+        margin: 0 auto!important;
+        display: block!important;
+    }
+}
+@media screen and (max-width: 940px) {
+    .get-started .main-active{
+        padding: 10px 20px!important;
+    }
+}

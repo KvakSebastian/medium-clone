@@ -9,5 +9,5 @@ export default class ArticleService {
       }
       return await res.json();
     };
-  
-  }
+
+}

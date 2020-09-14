@@ -1,7 +1,15 @@
 // Global app controller
-import ArticleService from './services/articles-service.js'
+import Articles from './models/Articles.js'
+import {renderArticles} from './views/articlesView.js'
+нн
+const service = new Articles();
 
-let service = new ArticleService();
-const res = service.getResource()
-.then(localStorage.setItem('articles', JSON.stringify(res)));
-console.log(res);
+const init = async () =>{
+  await service.getAllArticles();
+    if (document.location.pathname=== '/articles.html') {
+      renderArticles();
+    }
+}
+
+init();
+

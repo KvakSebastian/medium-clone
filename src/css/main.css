@@ -309,3 +309,7 @@ div.field label {
     width: 70px;
     height: 15px;
 }
+
+.invisible {
+    display: none;
+}

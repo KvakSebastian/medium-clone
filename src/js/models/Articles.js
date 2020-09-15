@@ -4,7 +4,7 @@ export default class Articles {
     
   async getAllArticles(){
     const service = new ArticleService();
-    const res = await service.getResource()
+    const res = await service.getArticles()
     localStorage.setItem('articles', JSON.stringify(res));
   }
   getArticle(id){
@@ -24,6 +24,22 @@ export default class Articles {
     const articles = JSON.parse(localStorage.getItem('articles'))
     const newArticles = articles.map(item =>item.id == id? item=subject:item );
     localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
+  addArticles = (author,category,title,text,image) =>{
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const maxId = articles.reduce((max, item) => item.id > max ? item.id : max, 0);    
+    const subject = {};
+    subject.id = +maxId+1;
+    subject.author = author;
+    subject.category = category;
+    subject.title = title;
+    subject.text = text;
+    subject.img = image;
+    subject.date = new Date();
+    subject.coments = [];
+    subject.isLiked = 'false';
+    articles.push(subject);
+    localStorage.setItem('articles', JSON.stringify(articles));
   }
     
 }

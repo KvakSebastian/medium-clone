@@ -1,6 +1,6 @@
 export default class ArticleService {
 
-    getResource = async () => {
+    getArticles = async () => {
       const res = await fetch(`https://5f5bcf95044570001674d370.mockapi.io/medium-clone`);
   
       if (!res.ok) {

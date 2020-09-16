@@ -13,8 +13,8 @@ const getSmallDescription = (id) =>{
 export const renderArticles = () => {
     let markup = '';
     articles.forEach(element => {
-        markup +=`<a href="article.html" id=${element.id}>
-                    <div class="main-content-articles__item">
+        markup +=`
+                    <div class="main-content-articles__item" id=${element.id}>
                         <div class="articles__item-text">
                             <div class="articles__item-text-header"><span>${element.title}</span></div>
                             <div class="articles__item-text-description">${getSmallDescription(element.id)}...</div>
@@ -25,9 +25,7 @@ export const renderArticles = () => {
                             </div>
                         </div>
                         <img  class='article-img' src="${element.img}" alt="">
-                    </div>
-                </a>`
-        
+                    </div>`
     });
     console.log(markup);
     document.querySelector('.main-content-articles').insertAdjacentHTML('afterbegin', markup);

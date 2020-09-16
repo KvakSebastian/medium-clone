@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <meta property="og:image" content="https://miro.medium.com/max/1200/1*zHQfWAA7XvniG-ECKZhSnA@2x.jpeg" data-rh="true">
     <title>Medium-articles</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-    integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+
 <body>
     <header>
         <div class="articles-header">
@@ -20,23 +22,25 @@
                     </div>
                 </a>
                 <button class='logout'>Log out</button>
-            </nav>
-        <div class="article-header-text"><h1>Medium Programmer Blog</h1>
-        </div>
-        <div class="article-header-span">
-            <span> A real-time resource for javascript community: news, advice, and commentary</span>
-        </div>
-        </div>
-</header>
 
-<main class="main-articles-wrapper">
-    <section class='panel-wrapper'>
-        <button class="add-article">
+            </nav>
+            <div class="article-header-text">
+                <h1>Medium Programmer Blog</h1>
+            </div>
+            <div class="article-header-span">
+                <span> A real-time resource for javascript community: news, advice, and commentary</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-articles-wrapper">
+        <section class='panel-wrapper'>
+            <button class="add-article">
             <a href="create-article.html">Додати Статтю</a>
         </button>
-        <div class="card-input-wrapper">
-            <input type="text" list="exampleList" placeholder="Сортувати за" name="sort">
-                    <datalist id="exampleList">
+            <div class="card-input-wrapper">
+                <input type="text" list="exampleList" placeholder="Сортувати за" name="sort">
+                <datalist id="exampleList">
                         <option>Датою</option>
                         <option>Категорією</option>
                     </datalist>
@@ -45,9 +49,10 @@
     <div class="main-content-articles">
         
     </div>
-
+    </main>
 
 </main>
 <script type="text/javascript" src="js/index.js"></script>
 </body>
+
 </html>

@@ -28,6 +28,10 @@ module.exports = {
           filename: 'create-article.html',
           template: './src/create-article.html'
         }),
+        new HtmlWebpackPlugin({
+          filename: 'edit.html',
+          template: './src/edit.html'
+        }),
         new MiniCssExtractPlugin({
             filename: 'css/style.css'
           })

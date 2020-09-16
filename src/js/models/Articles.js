@@ -41,5 +41,8 @@ export default class Articles {
     articles.push(subject);
     localStorage.setItem('articles', JSON.stringify(articles));
   }
+  deleteArticles = (id) => {
+    
+  }
     
 }

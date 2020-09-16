@@ -47,5 +47,13 @@ export default class Articles {
     const newArticles = articles.filter( item => item.id != article[0].id);
     localStorage.setItem('articles', JSON.stringify(newArticles));
   }
+  likeArticle = (id) =>{
+    const subject = this.getArticle(id);
+    subject.isLiked = !subject.isLiked;
+    console.log(subject);
+    const articles = JSON.parse(localStorage.getItem('articles'))
+    const newArticles = articles.map(item =>item.id == id? item=subject:item );
+    localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
     
 }

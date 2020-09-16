@@ -88,6 +88,10 @@ if (document.location.pathname === '/article.html') {
     document.querySelector('.edit-article').addEventListener('click', ()=>{
         location.href = "/edit.html";
     });
+    document.querySelector('.delete-article').addEventListener('click', ()=>{
+        service.deleteArticles();
+        location.href = "/articles.html";
+    });
     
 }
 if (document.location.pathname === '/edit.html') {

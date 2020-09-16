@@ -20,7 +20,7 @@ export const renderArticles = () => {
                             <div class="articles__item-text-author">${element.author}</div>
                             <div class="articles__item-text-panel">
                                 <span>${element.date} - </span>
-                                <i class="far fa-heart"></i>
+                                <i data-action="like" class="${(element.isLiked)?"fas fa-heart":"far fa-heart"}"></i>
                             </div>
                         </div>
                         <img  class='article-img' src="${element.img}" alt="">

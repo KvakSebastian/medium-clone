@@ -44,5 +44,13 @@ export default class Articles {
   deleteArticles = (id) => {
     
   }
+  likeArticle = (id) =>{
+    const subject = this.getArticle(id);
+    subject.isLiked = !subject.isLiked;
+    console.log(subject);
+    const articles = JSON.parse(localStorage.getItem('articles'))
+    const newArticles = articles.map(item =>item.id == id? item=subject:item );
+    localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
     
 }

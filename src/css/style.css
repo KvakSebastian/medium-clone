@@ -129,6 +129,18 @@
   height: 30px;
   margin-bottom: 10px;
 }
+
+.card-input-wrapper textarea{
+
+  height: 200px;
+
+  border-bottom: 1px solid #b3b3b3;
+
+  border-left: 1px solid #b3b3b3;
+
+  border-right: 1px solid #b3b3b3;
+
+}
 .panel-wrapper{
   display: flex;
   justify-content:flex-end;

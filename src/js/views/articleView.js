@@ -5,6 +5,21 @@ export const addArticleToLS = (id) => {
     const res = (articles.filter((item) => item.id == id));
     localStorage.setItem('article', JSON.stringify(res));
 };
+export const addComment = (comment,user) => {
+    let d = new Date();
+    let date = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+
+    const markup = `
+    <div class="comment-block-item">
+            <div class="comment-block-item-text">${comment}</div>
+            <div class="comment-block-item-info"> ${date}.${month}.${year} ${user}</div>
+        </div>`;
+        document.querySelector('.comment-block').insertAdjacentHTML('afterbegin', markup);
+
+};
+
 export const renderArticle = () => {
     const article = JSON.parse(localStorage.getItem('article'));
     let markup = '';

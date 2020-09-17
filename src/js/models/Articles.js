@@ -37,7 +37,7 @@ export default class Articles {
     subject.img = image;
     subject.date = new Date();
     subject.coments = [];
-    subject.isLiked = 'false';
+    subject.isLiked = false;
     articles.push(subject);
     localStorage.setItem('articles', JSON.stringify(articles));
   }

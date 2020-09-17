@@ -2,9 +2,8 @@
 import Articles from './models/Articles.js'
 import User from './models/User.js';
 import {renderArticles} from './views/articlesView.js'
-import {addArticleToLS, otherArticles, renderArticle} from './views/articleView.js'
+import {addArticleToLS, addComment, otherArticles, renderArticle} from './views/articleView.js'
 import { renderEditArticle } from './views/editArticleView.js';
-
 
 const service = new Articles();
 
@@ -51,6 +50,10 @@ const init = async () =>{
 init();
 if (document.location.pathname !== '/'){
     document.getElementById('username').innerText = `Hello, ${JSON.parse(localStorage.getItem('user'))}`;
+    document.querySelector('.logout').addEventListener('click',()=>{
+        localStorage.removeItem('user');
+        location.href = "/";
+    })
 }
 if (document.location.pathname=== '/') {
 document.addEventListener('DOMContentLoaded', function() {
@@ -89,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 }
-
 if (document.location.pathname=== '/create-article.html') {
 document.querySelector('#main-button').addEventListener('click',()=>{
 const author = document.getElementById('psevdo').value;
@@ -97,18 +99,24 @@ const category = document.getElementById('cat').value;
 const title = document.getElementById('title').value;
 const text = document.getElementById('text').value;
 const img = 'http://lorempixel.com/640/480/business';
-console.log(author,category,title,text,img);
-service.addArticles(author,category,title,text,img);
+if(!author||!category||!title||!text)
+
+  alert("Fill all fields!")
+
+else
+
+  service.addArticles(author,category,title,text,img);
 });
 }
-if (document.location.pathname=== '/articles.html') {
-    document.querySelector('.main-content-articles').addEventListener('click',(event)=>{
-    if (event.target.className === 'articles__item-text-header'){
-    console.log(event.target.id);
-    addArticleToLS(event.target.id);
-    location.href = "/article.html";
-}
-});
+
+if (document.location.pathname === '/articles.html') {
+    document.querySelector('.main-content-articles').addEventListener('click', (event) => {
+        if (event.target.className === 'articles__item-text-header') {
+            console.log(event.target.id);
+            addArticleToLS(event.target.id);
+            location.href = "/article.html";
+        }
+    });
 }
 if (document.location.pathname === '/article.html') {
     renderArticle();
@@ -125,30 +133,48 @@ if (document.location.pathname === '/article.html') {
         }
     });
     document.querySelector('.delete-article').addEventListener('click', ()=>{
-        if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
-        JSON.parse(localStorage.getItem('user')) === 'admin'){
-        service.deleteArticles();
-        location.href = "/articles.html";}
-        else {
+        const isDelete =confirm('Are you sure you want to delete the news?')
+        if(isDelete){
+          if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
+            JSON.parse(localStorage.getItem('user')) === 'admin'){
+            service.deleteArticles();
+            location.href = "/articles.html";}
+          else {
             alert('You have no access!');
+          }
+        }
+      });
+      document.querySelector('.other-articles').addEventListener('click',(event)=>{
+        if (event.target.className === 'articles__item-text-header'){
+        console.log(event.target.id);
+        addArticleToLS(event.target.id);
+        location.href = "/article.html";
+    }
+    });
+    const ctrlAddComment = ()=>{
+        const COMMENT = document.querySelector('.comment-add').value;
+        addComment(COMMENT,JSON.parse(localStorage.getItem('user')));
+    }
+    document.querySelector('.comment-add').addEventListener('keypress', (event) => {
+        if (event.keyCode === 13 || event.which === 13) {
+            ctrlAddComment();
         }
     });
-    
 }
 if (document.location.pathname === '/edit.html') {
-    renderEditArticle();   
-    document.querySelector('#main-button').addEventListener('click',(event)=>{
+    renderEditArticle();
+    document.querySelector('#main-button').addEventListener('click', (event) => {
         event.preventDefault();
         const author = document.getElementById('psevdo').value;
         const category = document.getElementById('cat').value;
         const title = document.getElementById('title').value;
         const text = document.getElementById('text').value;
         const img = 'http://lorempixel.com/640/480/business';
-        console.log(author,category,title,text,img);
+        console.log(author, category, title, text, img);
         const article = JSON.parse(localStorage.getItem('article'));
-        service.editArticle(article[0].id,author,category,title,text,img);
+        service.editArticle(article[0].id, author, category, title, text, img);
         location.href = "/articles.html";
-        });
+    });
 }
 
 
@@ -160,6 +186,7 @@ if(window.location.href.indexOf("articles.html") > -1){
   new Menu(articles);
 }
 
+if(window.location.href.indexOf("articles.html") > -1){
 
 const  dropbtn = document.querySelector('.dropbtn')
 
@@ -207,4 +234,5 @@ function sortBy(sortBy, articles) {
       return 0;
     })
   }
+}
 }

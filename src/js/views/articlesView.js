@@ -13,10 +13,10 @@ export const renderArticles = (arr) => {
     let markup = '';
     let renderArt;
     if(arr){
-        document.querySelector(".main-content-articles").innerHTML = ""
-        renderArt = arr
+        document.querySelector(".main-content-articles").innerHTML = "";
+        renderArt = arr;
     }else {
-        renderArt=articles
+        renderArt=articles;
     }
     renderArt.forEach(element => {
         markup +=`

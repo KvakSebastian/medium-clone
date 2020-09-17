@@ -291,14 +291,6 @@ hr {
     padding: 0 0 0px 0px;
 }
 
-input:invalid {
-    border-color: red;
-}
-
-input:valid {
-    border-color: green;
-}
-
 div.field {
     padding-bottom: 5px;
 }

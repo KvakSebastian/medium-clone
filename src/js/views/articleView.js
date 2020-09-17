@@ -30,18 +30,16 @@ export const otherArticles = () => {
     const otherArticlesIds = [];
     let generatedID = 0;
     for (let i=0;otherArticlesIds.length!=3;i++){
-        generatedID = Math.floor(Math.random()*(articles.length-1)+1);
+        generatedID = Math.floor(Math.random()*(articles.length-1))+(+articles[0].id);
         if ( generatedID  != excludeID && !otherArticlesIds.includes(generatedID) ){
             otherArticlesIds.push(generatedID);
         }
     }
+    console.log(otherArticlesIds)
     let markup = '';
-    console.log(articles[0]);
     otherArticlesIds.forEach(ind => {
-        console.log(ind);
         articles.forEach(item=>{
             if (item.id == ind ){
-                console.log(item.id);
         markup +=`
                     <div class="main-content-articles__item">
                         <div class="articles__item-text" >

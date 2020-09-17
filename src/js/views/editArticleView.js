@@ -6,5 +6,4 @@ export const renderEditArticle = (id) => {
     document.getElementById('title').value = article[0].title;
     document.getElementById('text').value = article[0].text;
     let markup = '';
-    console.log('ss')
 };

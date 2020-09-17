@@ -94,10 +94,16 @@
   font-size: 22px;
   line-height: 32px;
   font-weight: 600;
+  cursor: pointer;
 }
 .articles__item-text-description{
   line-height: 24px;
   font-size: 18px;
+  color: rgba(117, 117, 117, 1);
+}
+.articles__item-text-category{
+  line-height: 24px;
+  font-size: 16px;
   color: rgba(117, 117, 117, 1);
 }
 .articles__item-text-author{

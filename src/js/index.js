@@ -157,14 +157,30 @@ window.onclick = function(event) {
   }
 }
 
-const sortDate = document.querySelector(".sortDate");
+const sort = document.querySelectorAll(".sortArticles");
 
-sortDate.addEventListener("click", sortByDate);
+Array.from(sort).forEach(function(element) {
+  element.addEventListener('click', e=>sortArtcl(e));
+});
 
-function sortByDate() {
-  const articles = JSON.parse(localStorage.getItem('articles'));
-  articles.sort(function(a,b){
-    return new Date(b.date) - new Date(a.date);
-  });
+function sortArtcl(e) {
+  let articles = JSON.parse(localStorage.getItem('articles'));
+  const sort = e.target.dataset.sort
+  sortBy(sort, articles)
+  console.log(articles)
   renderArticles(articles)
+}
+
+function sortBy(sortBy, articles) {
+  if(sortBy==="date"){
+    articles.sort((a,b)=>{
+      return new Date(b.date) - new Date(a.date);
+    })
+  }else {
+    articles.sort((a,b) =>{
+      if(a.category < b.category) { return -1; }
+      if(a.category > b.category) { return 1; }
+      return 0;
+    })
+  }
 }

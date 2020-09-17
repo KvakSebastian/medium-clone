@@ -25,6 +25,7 @@ export const renderArticles = (arr) => {
                             <div class="articles__item-text-header" id=${element.id}>${element.title}</div>
                             <div class="articles__item-text-description">${getSmallDescription(element.id)}...</div>
                             <div class="articles__item-text-author">${element.author}</div>
+                            <div class="articles__item-text-category">Category: ${element.category}</div>
                             <div class="articles__item-text-panel">
                                 <span>${element.date} - </span>
                                 <i data-action="like" class="${(element.isLiked)?"fas fa-heart":"far fa-heart"}"></i>

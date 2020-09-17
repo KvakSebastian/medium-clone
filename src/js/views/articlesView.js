@@ -9,9 +9,16 @@ export const getSmallDescription = (id) =>{
 
 }
 
-export const renderArticles = () => {
+export const renderArticles = (arr) => {
     let markup = '';
-    articles.forEach(element => {
+    let renderArt;
+    if(arr){
+        document.querySelector(".main-content-articles").innerHTML = ""
+        renderArt = arr
+    }else {
+        renderArt=articles
+    }
+    renderArt.forEach(element => {
         markup +=`
                     <div class="main-content-articles__item">
                         <div class="articles__item-text" >

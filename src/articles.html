@@ -39,12 +39,14 @@
             <a href="create-article.html">Додати Статтю</a>
         </button>
             <div class="card-input-wrapper">
-                <input type="text" list="exampleList" placeholder="Сортувати за" name="sort">
-                <datalist id="exampleList">
-                        <option>Датою</option>
-                        <option>Категорією</option>
-                    </datalist>
-        </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Sort by</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a class="sortDate">Date</a>
+                        <a href="#">Category</a>
+                    </div>
+                </div>
+            </div>
     </section>
     <div class="main-content-articles">
         

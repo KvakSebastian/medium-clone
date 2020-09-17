@@ -108,40 +108,63 @@ if (document.location.pathname === '/edit.html') {
 
 
 class Menu {
-
-    constructor(elem) {
-
-        this._elem = elem;
-
-        elem.onclick = this.onClick.bind(this); // (*)
-
-    }
+   constructor(elem) {
+    this._elem = elem;
+    elem.onclick = this.onClick.bind(this); // (*)
+   }
 
     like(e) {
-        (e.className==="fas fa-heart")? e.className = "far fa-heart" : e.className = "fas fa-heart"
-        const articleItemText = e.closest(".articles__item-text");
-        const articleID = articleItemText.querySelector(".articles__item-text-header").id
-        service.likeArticle(articleID)
+      (e.className==="fas fa-heart")? e.className = "far fa-heart" : e.className = "fas fa-heart"
+      const articleItemText = e.closest(".articles__item-text");
+      const articleID = articleItemText.querySelector(".articles__item-text-header").id
+      service.likeArticle(articleID)
     }
 
-
-    onClick(event) {
-
-        let action = event.target.dataset.action;
-
-        if (action) {
-
-            this[action](event.target);
-
-        }
-
-    };
+  onClick(event) {
+    let action = event.target.dataset.action;
+    if (action) {
+      this[action](event.target);
+    }
+   };
 
 }
 if(window.location.href.indexOf("articles.html") > -1){
-    const articles = document.querySelector(".main-content-articles")
-    new Menu(articles);
+  const articles = document.querySelector(".main-content-articles")
+  new Menu(articles);
 }else if(window.location.href.indexOf("article.html")> -1){
-    const articles = document.querySelector(".other-articles")
-    new Menu(articles);
+  const articles = document.querySelector(".other-articles")
+  new Menu(articles);
+}
+
+
+const  dropbtn = document.querySelector('.dropbtn')
+
+function showOptions() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+dropbtn.addEventListener("click", showOptions)
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    const dropdowns = document.getElementsByClassName("dropdown-content");
+    for (let i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+const sortDate = document.querySelector(".sortDate");
+
+sortDate.addEventListener("click", sortByDate);
+
+function sortByDate() {
+  const articles = JSON.parse(localStorage.getItem('articles'));
+  articles.sort(function(a,b){
+    return new Date(b.date) - new Date(a.date);
+  });
+  renderArticles(articles)
 }

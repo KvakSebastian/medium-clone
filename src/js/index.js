@@ -152,11 +152,59 @@ if (document.location.pathname === '/edit.html') {
 }
 
 
-
 if(window.location.href.indexOf("articles.html") > -1){
-    const articles = document.querySelector(".main-content-articles")
-    new Menu(articles);
+  const articles = document.querySelector(".main-content-articles")
+  new Menu(articles);
 }else if(window.location.href.indexOf("article.html")> -1){
-    const articles = document.querySelector(".other-articles")
-    new Menu(articles);
+  const articles = document.querySelector(".other-articles")
+  new Menu(articles);
+}
+
+
+const  dropbtn = document.querySelector('.dropbtn')
+
+function showOptions() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+dropbtn.addEventListener("click", showOptions)
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    const dropdowns = document.getElementsByClassName("dropdown-content");
+    for (let i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+const sort = document.querySelectorAll(".sortArticles");
+
+Array.from(sort).forEach(function(element) {
+  element.addEventListener('click', e=>sortArtcl(e));
+});
+
+function sortArtcl(e) {
+  let articles = JSON.parse(localStorage.getItem('articles'));
+  const sort = e.target.dataset.sort
+  sortBy(sort, articles)
+  console.log(articles)
+  renderArticles(articles)
+}
+
+function sortBy(sortBy, articles) {
+  if(sortBy==="date"){
+    articles.sort((a,b)=>{
+      return new Date(b.date) - new Date(a.date);
+    })
+  }else {
+    articles.sort((a,b) =>{
+      if(a.category < b.category) { return -1; }
+      if(a.category > b.category) { return 1; }
+      return 0;
+    })
+  }
 }

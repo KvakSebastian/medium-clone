@@ -14,7 +14,6 @@ export default class Articles {
   }
   editArticle = (id,newAuthor,newCategory,newTitle,newText,newImage) =>{
     const subject = this.getArticle(id);
-    console.log(subject);
     subject.author = newAuthor;
     subject.category = newCategory;
     subject.title = newTitle;
@@ -63,12 +62,10 @@ export default class Articles {
         obj.comment = com;
         obj.author = user ;
         comments.push(obj);
-        console.log(comments)
         return {...item,comments}
       }
        else {return item}
       });
-      console.log(newArticles)
     localStorage.setItem('articles', JSON.stringify(newArticles));
   }
   deleteComment = (author,com) => {
@@ -78,16 +75,13 @@ export default class Articles {
     if (author === user || user =='admin'){
       const newArticles = articles.map( item => {
         if(item.id == article[0].id){
-          console.log(item);
          let newComments = item.comments.filter(c => c.comment !== com)
-         console.log(newComments);
           return {...item,comments:newComments}
         }
         else {
           return item
         }
       });
-      console.log(newArticles);
       localStorage.setItem('articles', JSON.stringify(newArticles));
     }
   }

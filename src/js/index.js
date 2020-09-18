@@ -113,7 +113,6 @@ else{
 if (document.location.pathname === '/articles.html') {
     document.querySelector('.main-content-articles').addEventListener('click', (event) => {
         if (event.target.className === 'articles__item-text-header') {
-            console.log(event.target.id);
             addArticleToLS(event.target.id);
             location.href = "/article.html";
         }
@@ -125,8 +124,6 @@ if (document.location.pathname === '/article.html') {
     otherArticles();
     renderComments();
     document.querySelector('.edit-article').addEventListener('click', ()=>{
-        console.log(`Hello, ${JSON.parse(localStorage.getItem('user'))}`);
-        console.log(document.getElementById('username').innerText)
         if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
         JSON.parse(localStorage.getItem('user')) === 'admin'){
             location.href = "/edit.html";
@@ -149,7 +146,6 @@ if (document.location.pathname === '/article.html') {
       });
       document.querySelector('.other-articles').addEventListener('click',(event)=>{
         if (event.target.className === 'articles__item-text-header'){
-        console.log(event.target.id);
         addArticleToLS(event.target.id);
         location.href = "/article.html";
     }
@@ -236,7 +232,6 @@ function sortArtcl(e) {
   let articles = JSON.parse(localStorage.getItem('articles'));
   const sort = e.target.dataset.sort
   sortBy(sort, articles)
-  console.log(articles)
   renderArticles(articles)
 }
 

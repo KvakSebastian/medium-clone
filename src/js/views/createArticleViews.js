@@ -4,7 +4,6 @@ const articles = JSON.parse(localStorage.getItem('articles'));
 const getSmallDescription = (id) =>{
     const item = articles.filter((item)=>item.id == id);
     let newItem = item[0].text.slice(0,70);
-        console.log(newItem);
 
     return newItem;
 
@@ -27,6 +26,5 @@ export const renderArticles = () => {
                         <img  class='article-img' src="${element.img}" alt="">
                     </div>`
     });
-    console.log(markup);
     document.querySelector('.main-content-articles').insertAdjacentHTML('afterbegin', markup);
 };

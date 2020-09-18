@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
     font-family: 'Medium-content-sans-serif-font
     ', sans-serif;
   }
@@ -318,4 +319,7 @@ margin-bottom: 30px;
 }
 .show {
   display:block;
+}
+.fa-times{
+  margin-left: 5px;
 }

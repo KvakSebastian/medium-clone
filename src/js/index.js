@@ -2,7 +2,7 @@
 import Articles from './models/Articles.js'
 import User from './models/User.js';
 import {renderArticles} from './views/articlesView.js'
-import {addArticleToLS, addComment, otherArticles, renderArticle} from './views/articleView.js'
+import {addArticleToLS, otherArticles, renderArticle, renderComment, renderComments} from './views/articleView.js'
 import { renderEditArticle } from './views/editArticleView.js';
 
 const service = new Articles();
@@ -117,10 +117,12 @@ if (document.location.pathname === '/articles.html') {
             location.href = "/article.html";
         }
     });
+    
 }
 if (document.location.pathname === '/article.html') {
     renderArticle();
     otherArticles();
+    renderComments();
     document.querySelector('.edit-article').addEventListener('click', ()=>{
         console.log(`Hello, ${JSON.parse(localStorage.getItem('user'))}`);
         console.log(document.getElementById('username').innerText)
@@ -152,13 +154,29 @@ if (document.location.pathname === '/article.html') {
     }
     });
     const ctrlAddComment = ()=>{
-        const COMMENT = document.querySelector('.comment-add').value;
-        addComment(COMMENT,JSON.parse(localStorage.getItem('user')));
+        let comment = document.querySelector('.comment-add').value;
+        if (comment != ''){
+        const user = JSON.parse(localStorage.getItem('user'));
+        service.addComment(comment,user);
+        renderComment(comment,user);
+        document.querySelector('.comment-add').value = '';
+        }
+        else {
+          alert("Your comment is Empty!");
+        }
     }
     document.querySelector('.comment-add').addEventListener('keypress', (event) => {
         if (event.keyCode === 13 || event.which === 13) {
             ctrlAddComment();
         }
+    });
+    document.querySelector('.comment-block').addEventListener('click', (event) => {
+      if(event.target.className == 'fas fa-times'){
+      const commentToDelete = event.target.parentNode.parentNode.firstChild.nextSibling.innerText;
+      const author = event.target.previousSibling.innerText;
+      service.deleteComment(author,commentToDelete);
+      renderComments();
+      }
     });
 }
 if (document.location.pathname === '/edit.html') {

@@ -20,7 +20,6 @@ export default class Articles {
     subject.title = newTitle;
     subject.text = newText;
     subject.img = newImage;
-    console.log(subject);
     const articles = JSON.parse(localStorage.getItem('articles'))
     const newArticles = articles.map(item =>item.id == id? item=subject:item );
     localStorage.setItem('articles', JSON.stringify(newArticles));
@@ -50,10 +49,47 @@ export default class Articles {
   likeArticle = (id) =>{
     const subject = this.getArticle(id);
     subject.isLiked = !subject.isLiked;
-    console.log(subject);
     const articles = JSON.parse(localStorage.getItem('articles'))
     const newArticles = articles.map(item =>item.id == id? item=subject:item );
     localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
+  addComment = (com,user) => {
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const article = JSON.parse(localStorage.getItem('article'));
+    const newArticles = articles.map(item =>{ 
+      if(item.id == article[0].id){
+        let comments = item.comments;
+        let obj = {};
+        obj.comment = com;
+        obj.author = user ;
+        comments.push(obj);
+        console.log(comments)
+        return {...item,comments}
+      }
+       else {return item}
+      });
+      console.log(newArticles)
+    localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
+  deleteComment = (author,com) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const article = JSON.parse(localStorage.getItem('article'));
+    if (author === user || user =='admin'){
+      const newArticles = articles.map( item => {
+        if(item.id == article[0].id){
+          console.log(item);
+         let newComments = item.comments.filter(c => c.comment !== com)
+         console.log(newComments);
+          return {...item,comments:newComments}
+        }
+        else {
+          return item
+        }
+      });
+      console.log(newArticles);
+      localStorage.setItem('articles', JSON.stringify(newArticles));
+    }
   }
     
 }

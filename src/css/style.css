@@ -95,6 +95,9 @@
    align-items: str;
    margin-bottom: 20px;
 }
+.articles__item-text{
+  width: 50%;
+}
 .articles__item-text-header{
   font-size: 22px;
   line-height: 32px;
@@ -145,6 +148,28 @@
 
   border-right: 1px solid #b3b3b3;
 
+}
+@media screen and (max-width: 450px) {
+    .articles-header{
+      height: 450px;
+    }
+  }
+@media screen and (max-width: 550px) {
+  .articles__item-text {
+    width: 100%;
+  }
+  .article-content{
+    width: 90%!important;
+  }
+    .main-content-articles__item {
+    display: block;
+    }
+    .card__form-data{
+      width: 100%;
+    }
+    .article-content{
+      width:90%
+    }
 }
 .panel-wrapper{
   display: flex;
@@ -244,6 +269,7 @@
 input[type="file"] {
   display: none;
 }
+
 .custom-file-upload:hover{
   background-color:#e3e7edff;
 }

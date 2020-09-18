@@ -343,28 +343,33 @@ margin-bottom: 30px;
   width: 40%;
   margin: 0 auto;
 }
+.articles__item-text{
+  width: 50%;
+}
 @media screen and (max-width: 950px) {
   .main-content-articles{
     margin-top: 65px;
   }
 }
 @media screen and (max-width: 550px) {
+  .article-content {
+    width: 80%;
+  }
   .main-content-articles__item{
     flex-direction: column;
   }
+  .main-article-wrapper img {
+    width: 250px;
+    height: auto;
+    }
+  .articles__item-text {
+      width: 100%;
+  }
 }
-.articles__item-text{
-  width: 50%;
-}
+
 @media screen and (max-width: 780px) {
   .main-article-wrapper img {
   width: 400px;
-  height: auto;
-  }
-}
-@media screen and (max-width: 450px) {
-  .main-article-wrapper img {
-  width: 250px;
   height: auto;
   }
 }

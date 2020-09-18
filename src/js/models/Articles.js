@@ -14,13 +14,11 @@ export default class Articles {
   }
   editArticle = (id,newAuthor,newCategory,newTitle,newText,newImage) =>{
     const subject = this.getArticle(id);
-    console.log(subject);
     subject.author = newAuthor;
     subject.category = newCategory;
     subject.title = newTitle;
     subject.text = newText;
     subject.img = newImage;
-    console.log(subject);
     const articles = JSON.parse(localStorage.getItem('articles'))
     const newArticles = articles.map(item =>item.id == id? item=subject:item );
     localStorage.setItem('articles', JSON.stringify(newArticles));
@@ -50,10 +48,42 @@ export default class Articles {
   likeArticle = (id) =>{
     const subject = this.getArticle(id);
     subject.isLiked = !subject.isLiked;
-    console.log(subject);
     const articles = JSON.parse(localStorage.getItem('articles'))
     const newArticles = articles.map(item =>item.id == id? item=subject:item );
     localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
+  addComment = (com,user) => {
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const article = JSON.parse(localStorage.getItem('article'));
+    const newArticles = articles.map(item =>{ 
+      if(item.id == article[0].id){
+        let comments = item.comments;
+        let obj = {};
+        obj.comment = com;
+        obj.author = user ;
+        comments.push(obj);
+        return {...item,comments}
+      }
+       else {return item}
+      });
+    localStorage.setItem('articles', JSON.stringify(newArticles));
+  }
+  deleteComment = (author,com) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const article = JSON.parse(localStorage.getItem('article'));
+    if (author === user || user =='admin'){
+      const newArticles = articles.map( item => {
+        if(item.id == article[0].id){
+         let newComments = item.comments.filter(c => c.comment !== com)
+          return {...item,comments:newComments}
+        }
+        else {
+          return item
+        }
+      });
+      localStorage.setItem('articles', JSON.stringify(newArticles));
+    }
   }
     
 }

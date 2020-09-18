@@ -5,17 +5,42 @@ export const addArticleToLS = (id) => {
     const res = (articles.filter((item) => item.id == id));
     localStorage.setItem('article', JSON.stringify(res));
 };
-export const addComment = (comment,user) => {
+export const renderComment = (com,user) => {
     let d = new Date();
     let date = d.getDate();
     let month = d.getMonth() + 1;
     let year = d.getFullYear();
+    let markup = ``;
+            markup +=`
+            <div class="comment-block-item">
+                <div class="comment-block-item-text">${com}</div>
+                <div class="comment-block-item-info"> ${date}.${month}.${year} <span class = 'comment-author'>${user}  </span><i class="fas fa-times"></i></div>
+            </div>`
+        document.querySelector('.comment-block').insertAdjacentHTML('afterbegin', markup);
 
-    const markup = `
-    <div class="comment-block-item">
-            <div class="comment-block-item-text">${comment}</div>
-            <div class="comment-block-item-info"> ${date}.${month}.${year} ${user}</div>
-        </div>`;
+};
+
+export const renderComments = () => {
+    document.querySelector('.comment-block').innerHTML= '<input class="comment-add" placeholder="Add your comment and press Enter"></input>';
+    let d = new Date();
+    let date = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+    const articles = JSON.parse(localStorage.getItem('articles'));
+    const article = JSON.parse(localStorage.getItem('article'));
+    let markup = ``;
+    articles.forEach(item => {
+        if (item.id === article[0].id){
+            item.comments.forEach(elem =>{
+            markup +=`
+            <div class="comment-block-item">
+                <div class="comment-block-item-text">${elem.comment}</div>
+                <div class="comment-block-item-info"> ${date}.${month}.${year} <span class = 'comment-author'>${elem.author}</span><i class="fas fa-times"></i></div>
+            </div>`
+            } )
+        }
+
+    })
         document.querySelector('.comment-block').insertAdjacentHTML('afterbegin', markup);
 
 };
@@ -50,7 +75,6 @@ export const otherArticles = () => {
             otherArticlesIds.push(generatedID);
         }
     }
-    console.log(otherArticlesIds)
     let markup = '';
     otherArticlesIds.forEach(ind => {
         articles.forEach(item=>{

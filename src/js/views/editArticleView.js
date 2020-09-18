@@ -5,5 +5,6 @@ export const renderEditArticle = (id) => {
     document.getElementById('cat').value = article[0].category;
     document.getElementById('title').value = article[0].title;
     document.getElementById('text').value = article[0].text;
+    document.getElementById('image').value = article[0].img;
     let markup = '';
 };

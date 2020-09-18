@@ -2,7 +2,7 @@
 import Articles from './models/Articles.js'
 import User from './models/User.js';
 import {renderArticles} from './views/articlesView.js'
-import {addArticleToLS, addComment, otherArticles, renderArticle} from './views/articleView.js'
+import {addArticleToLS, otherArticles, renderArticle, renderComment, renderComments} from './views/articleView.js'
 import { renderEditArticle } from './views/editArticleView.js';
 
 const service = new Articles();
@@ -98,32 +98,32 @@ const author = document.getElementById('psevdo').value;
 const category = document.getElementById('cat').value;
 const title = document.getElementById('title').value;
 const text = document.getElementById('text').value;
-const img = 'http://lorempixel.com/640/480/business';
+const img = document.getElementById('image').value || 'http://lorempixel.com/640/480/business';
 if(!author||!category||!title||!text)
 
   alert("Fill all fields!")
 
-else
-
+else{
   service.addArticles(author,category,title,text,img);
+  location.href = "/articles.html";}
+
 });
 }
 
 if (document.location.pathname === '/articles.html') {
     document.querySelector('.main-content-articles').addEventListener('click', (event) => {
         if (event.target.className === 'articles__item-text-header') {
-            console.log(event.target.id);
             addArticleToLS(event.target.id);
             location.href = "/article.html";
         }
     });
+    
 }
 if (document.location.pathname === '/article.html') {
     renderArticle();
     otherArticles();
+    renderComments();
     document.querySelector('.edit-article').addEventListener('click', ()=>{
-        console.log(`Hello, ${JSON.parse(localStorage.getItem('user'))}`);
-        console.log(document.getElementById('username').innerText)
         if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
         JSON.parse(localStorage.getItem('user')) === 'admin'){
             location.href = "/edit.html";
@@ -146,19 +146,34 @@ if (document.location.pathname === '/article.html') {
       });
       document.querySelector('.other-articles').addEventListener('click',(event)=>{
         if (event.target.className === 'articles__item-text-header'){
-        console.log(event.target.id);
         addArticleToLS(event.target.id);
         location.href = "/article.html";
     }
     });
     const ctrlAddComment = ()=>{
-        const COMMENT = document.querySelector('.comment-add').value;
-        addComment(COMMENT,JSON.parse(localStorage.getItem('user')));
+        let comment = document.querySelector('.comment-add').value;
+        if (comment != ''){
+        const user = JSON.parse(localStorage.getItem('user'));
+        service.addComment(comment,user);
+        renderComment(comment,user);
+        document.querySelector('.comment-add').value = '';
+        }
+        else {
+          alert("Your comment is Empty!");
+        }
     }
     document.querySelector('.comment-add').addEventListener('keypress', (event) => {
         if (event.keyCode === 13 || event.which === 13) {
             ctrlAddComment();
         }
+    });
+    document.querySelector('.comment-block').addEventListener('click', (event) => {
+      if(event.target.className == 'fas fa-times'){
+      const commentToDelete = event.target.parentNode.parentNode.firstChild.nextSibling.innerText;
+      const author = event.target.previousSibling.innerText;
+      service.deleteComment(author,commentToDelete);
+      renderComments();
+      }
     });
 }
 if (document.location.pathname === '/edit.html') {
@@ -169,8 +184,7 @@ if (document.location.pathname === '/edit.html') {
         const category = document.getElementById('cat').value;
         const title = document.getElementById('title').value;
         const text = document.getElementById('text').value;
-        const img = 'http://lorempixel.com/640/480/business';
-        console.log(author, category, title, text, img);
+        const img = document.getElementById('image').value ;
         const article = JSON.parse(localStorage.getItem('article'));
         service.editArticle(article[0].id, author, category, title, text, img);
         location.href = "/articles.html";
@@ -218,7 +232,6 @@ function sortArtcl(e) {
   let articles = JSON.parse(localStorage.getItem('articles'));
   const sort = e.target.dataset.sort
   sortBy(sort, articles)
-  console.log(articles)
   renderArticles(articles)
 }
 

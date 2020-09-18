@@ -9,7 +9,6 @@ export default class User {
   }
   async checkUsers(log,pass){
     const res = await this.getUsers();
-    console.log(res);
     let isUser = false;
     res.forEach(user => {
     if (user.name === log && user.password === pass){

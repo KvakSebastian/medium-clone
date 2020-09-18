@@ -9,141 +9,119 @@ const service = new Articles();
 
 export default class Menu {
 
-    constructor(elem) {
+  constructor(elem) {
+    this._elem = elem;
+    elem.onclick = this.onClick.bind(this);
+  }
 
-        this._elem = elem;
-
-        elem.onclick = this.onClick.bind(this);
-
-    }
-
-    like(e) {
-        (e.className==="fas fa-heart")? e.className = "far fa-heart" : e.className = "fas fa-heart"
-        const articleItemText = e.closest(".articles__item-text");
-        const articleID = articleItemText.querySelector(".articles__item-text-header").id
-        service.likeArticle(articleID)
-    }
-
-
-    onClick(event) {
-
-        let action = event.target.dataset.action;
-
-        if (action) {
-
-            this[action](event.target);
-
-        }
-
-    };
-
+  like(e) {
+    (e.className==="fas fa-heart")? e.className = "far fa-heart" : e.className = "fas fa-heart"
+    const articleItemText = e.closest(".articles__item-text");
+    const articleID = articleItemText.querySelector(".articles__item-text-header").id
+    service.likeArticle(articleID)
+  }
+  onClick(event) {
+    let action = event.target.dataset.action;
+      if (action) {
+        this[action](event.target);
+      }
+  };
 }
 const init = async () =>{
-    if (localStorage.getItem('articles') === null){
-  await service.getAllArticles();
+  if (localStorage.getItem('articles') === null){
+    await service.getAllArticles();
+  }
+  if (document.location.pathname=== '/articles.html') {
+    renderArticles();
+  }
 }
-    if (document.location.pathname=== '/articles.html') {
-      renderArticles();
-    }
-}
-
 init();
 if (document.location.pathname !== '/'){
-    document.getElementById('username').innerText = `Hello, ${JSON.parse(localStorage.getItem('user'))}`;
-    document.querySelector('.logout').addEventListener('click',()=>{
-        localStorage.removeItem('user');
-        location.href = "/";
-    })
+  document.getElementById('username').innerText = `Hello, ${JSON.parse(localStorage.getItem('user'))}`;
+  document.querySelector('.logout').addEventListener('click',()=>{
+    localStorage.removeItem('user');
+    location.href = "/";
+  })
 }
 if (document.location.pathname=== '/') {
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const MODAL = document.getElementById("modalWindow");
     const BTNS = document.querySelectorAll(".getStarted");
     const SPAN = document.getElementsByClassName("closeModalWindow")[0];
     const OK = document.querySelector('#modalWindow form input[type="button"]');
     const EMAIL = document.querySelector('#modalWindow form [name="email"]');
     const PASSWORD = document.querySelector('#modalWindow form [name="password"]');
-
     BTNS.forEach(BTN => {
-        BTN.addEventListener('click', function() {
-            MODAL.style.display = "block";
-        })
+      BTN.addEventListener('click', function() {
+        MODAL.style.display = "block";
+      })
     });
     SPAN.addEventListener('click', function() {
-        MODAL.style.display = "none";
+      MODAL.style.display = "none";
     });
-    
-
     OK.addEventListener('click',  async() => {
-        const user = new User;
-        const LOGIN_VALUE = EMAIL.value;
-        const PASSWORD_VALUE = PASSWORD.value;
-        await user.checkUsers(LOGIN_VALUE,PASSWORD_VALUE);
-        const loggedUser =  JSON.parse(localStorage.getItem('user'))
-
+      const user = new User;
+      const LOGIN_VALUE = EMAIL.value;
+      const PASSWORD_VALUE = PASSWORD.value;
+      await user.checkUsers(LOGIN_VALUE,PASSWORD_VALUE);
+      const loggedUser =  JSON.parse(localStorage.getItem('user'))
         if (loggedUser !== null) {
-            MODAL.style.display = "none";
-            location.href = "/articles.html";
-            return;
+          MODAL.style.display = "none";
+          location.href = "/articles.html";
+          return;
         }
-
         alert('Email or password is wrong')
     });
-    
 });
 }
 if (document.location.pathname=== '/create-article.html') {
-document.querySelector('#main-button').addEventListener('click',()=>{
-const author = document.getElementById('psevdo').value;
-const category = document.getElementById('cat').value;
-const title = document.getElementById('title').value;
-const text = document.getElementById('text').value;
-const img = document.getElementById('image').value || 'http://lorempixel.com/640/480/business';
-if(!author||!category||!title||!text)
-
-  alert("Fill all fields!")
-
-else{
-  service.addArticles(author,category,title,text,img);
-  location.href = "/articles.html";}
-
-});
+  document.querySelector('#main-button').addEventListener('click',()=>{
+    const author = document.getElementById('psevdo').value;
+    const category = document.getElementById('cat').value;
+    const title = document.getElementById('title').value;
+    const text = document.getElementById('text').value;
+    const img = document.getElementById('image').value || 'http://lorempixel.com/640/480/business';
+    if(!author||!category||!title||!text)
+      alert("Fill all fields!")
+    else{
+      service.addArticles(author,category,title,text,img);
+      location.href = "/articles.html";}
+  });
 }
 
 if (document.location.pathname === '/articles.html') {
-    document.querySelector('.main-content-articles').addEventListener('click', (event) => {
-        if (event.target.className === 'articles__item-text-header') {
-            addArticleToLS(event.target.id);
-            location.href = "/article.html";
-        }
-    });
-    
+  document.querySelector('.main-content-articles').addEventListener('click', (event) => {
+    if (event.target.className === 'articles__item-text-header') {
+      addArticleToLS(event.target.id);
+      location.href = "/article.html";
+    }
+  });  
 }
 if (document.location.pathname === '/article.html') {
-    renderArticle();
-    otherArticles();
-    renderComments();
-    document.querySelector('.edit-article').addEventListener('click', ()=>{
+  renderArticle();
+  otherArticles();
+  renderComments();
+  document.querySelector('.edit-article').addEventListener('click', ()=>{
+    if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
+      JSON.parse(localStorage.getItem('user')) === 'admin'){
+        location.href = "/edit.html";
+    }
+    else{
+      alert('You have no access!');
+    }
+  });
+  document.querySelector('.delete-article').addEventListener('click', ()=>{
+    const isDelete =confirm('Are you sure you want to delete the news?')
+      if(isDelete){
         if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
-        JSON.parse(localStorage.getItem('user')) === 'admin'){
-            location.href = "/edit.html";
+          JSON.parse(localStorage.getItem('user')) === 'admin'){
+          service.deleteArticles();
+          location.href = "/articles.html";}
+        else {
+          alert('You have no access!');
         }
-        else{
-            alert('You have no access!');
-        }
+      }
     });
-    document.querySelector('.delete-article').addEventListener('click', ()=>{
-        const isDelete =confirm('Are you sure you want to delete the news?')
-        if(isDelete){
-          if ( JSON.parse(localStorage.getItem('user')) === document.querySelector('.author').innerText ||
-            JSON.parse(localStorage.getItem('user')) === 'admin'){
-            service.deleteArticles();
-            location.href = "/articles.html";}
-          else {
-            alert('You have no access!');
-          }
-        }
-      });
       document.querySelector('.other-articles').addEventListener('click',(event)=>{
         if (event.target.className === 'articles__item-text-header'){
         addArticleToLS(event.target.id);

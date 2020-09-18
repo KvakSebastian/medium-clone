@@ -98,14 +98,15 @@ const author = document.getElementById('psevdo').value;
 const category = document.getElementById('cat').value;
 const title = document.getElementById('title').value;
 const text = document.getElementById('text').value;
-const img = 'http://lorempixel.com/640/480/business';
+const img = document.getElementById('image').value || 'http://lorempixel.com/640/480/business';
 if(!author||!category||!title||!text)
 
   alert("Fill all fields!")
 
-else
-
+else{
   service.addArticles(author,category,title,text,img);
+  location.href = "/articles.html";}
+
 });
 }
 
@@ -187,8 +188,7 @@ if (document.location.pathname === '/edit.html') {
         const category = document.getElementById('cat').value;
         const title = document.getElementById('title').value;
         const text = document.getElementById('text').value;
-        const img = 'http://lorempixel.com/640/480/business';
-        console.log(author, category, title, text, img);
+        const img = document.getElementById('image').value ;
         const article = JSON.parse(localStorage.getItem('article'));
         service.editArticle(article[0].id, author, category, title, text, img);
         location.href = "/articles.html";

@@ -33,7 +33,7 @@
 </header>
 <main class="main-create-article-wrapper">
     <h2 class ='h2-title'>Add Article</h2>
-    <form  id="main-form">
+    <div  id="main-form">
         <div class="card-form-container">
             <div class="card-form">
                 <div class="card__form-data">
@@ -51,20 +51,20 @@
                     <div class="card-input-wrapper">
                         <textarea id='text' placeholder="Enter article" required ></textarea>
                     </div>
-                    <label for="file-upload" class="custom-file-upload">
-                        Upload your photo
-                    </label>
-                    <input type="file" id="file-upload" >
+                    <div class="card-input-wrapper">
+                        <input placeholder="Image"
+                              id="image" minlength="0" required>
+                    </div>
 
                 </div>
             </div>
         </div>
         <div class="button-form">
             <button type="submit" class="add-article btn btn-primary" id="main-button" >
-                <a href="articles.html" >Add Article</a>
+                Add Article
             </button>
         </div>
-    </form>
+    </div>
 </main>
     
 </body>

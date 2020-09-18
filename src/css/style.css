@@ -47,7 +47,12 @@
 .articles-logo{
   padding-right: 10px; 
 }
+.logout:hover{
+  background:#2980B9;
+  color: white;
+}
 .logout{
+  cursor:pointer;
   width: 80px;
   height: 30px;
   background: none;
@@ -147,13 +152,16 @@
   width: 100%;
   margin-bottom: 20px;
   margin-right: 20px;
-  height: 30px;
+  height: 35px;
+}
+.add-article:hover{
+  background:#e3e7edff;
 }
 .add-article{
+  float: right;
   background: white;
-  border:0;
-  border-bottom:1px solid black;
-  margin-right: 20px;
+  padding: 10px;
+  border:2px solid #e3e7edff;
   outline: none;
   margin-bottom: 20px;
 }
@@ -196,12 +204,16 @@
 }
 .add-article{
   width: 100px;
-  height: 30px;
+  height: 35px;
+}
+.btn-change:hover{
+  background:#e3e7edff;
 }
 .btn-change{
+  cursor: pointer;
   background: none;
-  border: none;
-  border-bottom: 1px solid black;
+  padding: 10px;
+  border:2px solid #e3e7edff;
   margin-right: 20px;
 }
 .comment-block{
@@ -232,10 +244,13 @@
 input[type="file"] {
   display: none;
 }
+.custom-file-upload:hover{
+  background-color:#e3e7edff;
+}
 .custom-file-upload {
-  border-bottom: 1px solid #000;
+  padding: 10px;
+  border:2px solid #e3e7edff;
   display: inline-block;
-  padding: 6px 12px;
   cursor: pointer;
 }
 .other-articles{
@@ -296,6 +311,7 @@ margin-bottom: 30px;
   border: none;
   cursor: pointer;
   margin-right: 30px;
+  margin-left: 20px;
 }
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
@@ -318,4 +334,13 @@ margin-bottom: 30px;
 }
 .show {
   display:block;
+}
+.button-form{
+  width: 40%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 950px) {
+  .main-content-articles{
+    margin-top: 65px;
+  }
 }
